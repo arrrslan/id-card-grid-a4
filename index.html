@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A4 Card Printer (Front/Back)</title>
+    <style>
+        /* Base Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* The A4 Page Container */
+        .a4-page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* The Grid Wrapper */
+        .sector-grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 Equal Columns */
+            grid-template-rows: 1fr 1fr 1fr 1fr; /* 4 Equal Rows */
+        }
+
+        /* The Sector Cell */
+        .sector-cell {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* CUTTING LINES (Thin Gray Dashed) */
+        /* Vertical line divider */
+        .sector-cell:nth-child(odd) {
+            border-right: 0.5pt dashed #bbb;
+        }
+
+        /* Horizontal line dividers */
+        .sector-cell:nth-child(-n+6) {
+            border-bottom: 0.5pt dashed #bbb;
+        }
+
+        /* The Card Itself */
+        .visual-card {
+            width: 85.60mm;
+            height: 53.98mm;
+            border-radius: 3.18mm;
+            background-color: #f9f9f9;
+            
+            /* Negligible Border: Very thin (0.25pt) and light gray */
+            border: 0.25pt solid #e0e0e0;
+            
+            /* Image Handling */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden; /* Clips the image to the rounded corners */
+            transition: filter 0.3s ease; /* Smooth transition for filter change */
+        }
+
+        /* B&W Optimization Filter */
+        .visual-card.bnw-optimized {
+            /* Grayscale + boosted brightness and contrast for clearer B&W print */
+            filter: grayscale(100%) brightness(1.15) contrast(1.05);
+        }
+
+        /* Placeholder Text Styles */
+        .placeholder-text {
+            color: #aaa;
+            /* font-weight: bold; */
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Times New Roman', serif;
+            pointer-events: none; /* Let clicks pass through if needed */
+        }
+
+        /* Instructions & Controls UI */
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 3.18mm;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            max-width: 280px;
+            z-index: 100;
+        }
+
+        .controls h3 { margin-bottom: 10px; color: #333; }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        .input-group input[type="file"] {
+            font-size: 0.8rem;
+            width: 100%;
+        }
+
+        /* Styles for the toggle checkbox group */
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .toggle-group input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .toggle-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .btn-print {
+            background-color: #7d2006;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3.18mm;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        
+        .btn-print:hover { background-color: #541f09; }
+        
+        .note {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        /* PRINT SETTINGS */
+        @media print {
+            @page { 
+                size: A4; 
+                margin: 0; 
+            }
+            body { margin: 0; padding: 0; background: none; }
+            .a4-page { box-shadow: none; margin: 0 auto; page-break-after: always; }
+            .controls { display: none; } /* Hide controls when printing */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <h3>Card Setup</h3>
+        
+        <div class="input-group">
+            <label for="frontInput">Left Column (Front):</label>
+            <input type="file" id="frontInput" accept="image/*">
+        </div>
+
+        <div class="input-group">
+            <label for="backInput">Right Column (Back):</label>
+            <input type="file" id="backInput" accept="image/*">
+        </div>
+
+        <div class="toggle-group">
+            <input type="checkbox" id="bnwToggle">
+            <label for="bnwToggle">B&W Print</label>
+        </div>
+
+        <button class="btn-print" onclick="window.print()">Print Page</button>
+        
+        <p class="note">
+            <strong>Tip:</strong> Ensure your printer scale is set to <strong>100%</strong> (Actual Size) for accurate dimensions.
+        </p>
+    </div>
+
+    <div class="a4-page">
+        <div class="sector-grid">
+            
+            <!-- Row 1 -->
+            <div class="sector-cell">
+                <div class="visual-card front-card">
+                    <span class="placeholder-text">Front</span>
+                </div>
+            </div>
+            <div class="sector-cell">
+                <div class="visual-card back-card">
+                    <span class="placeholder-text">Back</span>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="sector-cell">
+                <div class="visual-card front-card">
+                    <span class="placeholder-text">Front</span>
+                </div>
+            </div>
+            <div class="sector-cell">
+                <div class="visual-card back-card">
+                    <span class="placeholder-text">Back</span>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="sector-cell">
+                <div class="visual-card front-card">
+                    <span class="placeholder-text">Front</span>
+                </div>
+            </div>
+            <div class="sector-cell">
+                <div class="visual-card back-card">
+                    <span class="placeholder-text">Back</span>
+                </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="sector-cell">
+                <div class="visual-card front-card">
+                    <span class="placeholder-text">Front</span>
+                </div>
+            </div>
+            <div class="sector-cell">
+                <div class="visual-card back-card">
+                    <span class="placeholder-text">Back</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Function to handle image uploads and preview
+        function handleImageUpload(inputId, cardClass) {
+            document.getElementById(inputId).addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const cards = document.querySelectorAll('.' + cardClass);
+                        cards.forEach(card => {
+                            // Set the background image
+                            card.style.backgroundImage = `url(${e.target.result})`;
+                            // Hide the placeholder text
+                            const placeholder = card.querySelector('.placeholder-text');
+                            if (placeholder) placeholder.style.display = 'none';
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Initialize listeners
+        handleImageUpload('frontInput', 'front-card');
+        handleImageUpload('backInput', 'back-card');
+
+        // Handle B&W Optimization Toggle
+        const bnwToggle = document.getElementById('bnwToggle');
+        const allCards = document.querySelectorAll('.visual-card');
+
+        bnwToggle.addEventListener('change', function() {
+            const isChecked = this.checked;
+            allCards.forEach(card => {
+                if (isChecked) {
+                    card.classList.add('bnw-optimized');
+                } else {
+                    card.classList.remove('bnw-optimized');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
