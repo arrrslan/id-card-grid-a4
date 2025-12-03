@@ -6,10 +6,7 @@
     <title>ID Card Grid A4</title>
     <link rel="icon" 
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect x='32' y='80' width='448' height='352' rx='32' ry='32' fill='%23800000'/><path d='M104 160c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H104zM164 160c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H164zM104 232c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H104zM164 232c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H164z' fill='%23FFC000'/></svg>">
-      <!-- Import Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- Icons -->
+      <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -275,32 +272,42 @@
         .id-card:hover .placeholder i { color: var(--primary); transform: scale(1.1); transition: 0.3s; }
         .id-card:hover .placeholder span { color: var(--primary); }
 
-        /* --- EASTER EGG FOOTER --- */
+        /* --- EASTER EGG FOOTER (PREMIUM FROSTED GLASS EFFECT) --- */
         .easter-egg-footer {
             position: fixed;
             bottom: 20px;
             right: 20px;
             font-size: 0.85rem;
             color: var(--primary);
-            background: rgba(255, 255, 255, 0.8);
-            padding: 8px 16px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-            opacity: 0.6;
-            transition: all 0.3s ease;
-            cursor: default;
+            
+            /* Enhanced Frosted Glass Effect */
+            background: rgba(255, 255, 255, 0.25); /* Slightly more opaque */
+            backdrop-filter: blur(20px) saturate(1.4); /* Increased blur and saturation */
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid rgba(255, 255, 255, 0.4); /* Stronger border */
+            box-shadow: 
+                0 8px 32px 0 rgba(128, 0, 0, 0.15),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+            
+            padding: 10px 20px;
+            border-radius: 50px;
+            opacity: 0.9;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
             z-index: 100;
-            backdrop-filter: blur(4px);
             font-weight: 600;
-            font-family:'Courier New', Courier, monospace
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: -0.5px;
         }
 
         .easter-egg-footer:hover {
             opacity: 1;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 
+                0 15px 40px -5px rgba(128, 0, 0, 0.25),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
         }
 
         .easter-egg-footer span {
@@ -355,14 +362,21 @@
             display: flex; align-items: center; justify-content: center;
             overflow: hidden;
             touch-action: none;
-            padding: 40px; 
+            padding: 20px; 
             background-image: radial-gradient(#1e293b 1px, transparent 1px);
             background-size: 20px 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .editor-stage {
+                padding: 40px; 
+            }
         }
 
         #workCanvas { 
             box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
             max-width: 100%; max-height: 100%; 
+            width: auto; height: auto;
             display: block;
         }
         
@@ -519,9 +533,6 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn btn-success" id="downloadBtn" onclick="generatePDF()">
-                <i class="fa-solid fa-file-pdf"></i> Download PDF
-            </button>
             <button class="btn btn-primary" onclick="window.print()">
                 <i class="fa-solid fa-print"></i> Print Preview
             </button>
@@ -549,7 +560,7 @@
 
     <!-- EASTER EGG FOOTER -->
     <div class="easter-egg-footer"> 
-        Developed with <b>𖹭 </b> by Arslan
+        Developed with <span>𖹭</span> by Arslan
     </div>
 
     <input type="file" id="singleUpload" style="display: none;" accept="image/*">
@@ -732,9 +743,15 @@
             
             // Calculate best fit for stage
             const stage = document.querySelector('.editor-stage');
-            // Subtract padding
-            const maxW = stage.clientWidth - 60; 
-            const maxH = stage.clientHeight - 60;
+            
+            // Dynamic padding calculation
+            const style = window.getComputedStyle(stage);
+            const padX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+            const padY = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+
+            // Subtract padding + safety margin
+            const maxW = stage.clientWidth - padX - 20;
+            const maxH = stage.clientHeight - padY - 20;
             
             const iW = state.img.width;
             const iH = state.img.height;
@@ -1143,23 +1160,6 @@
                 x[i] = (B[i] - sum) / A[i][i];
             }
             return x;
-        }
-
-        function generatePDF() {
-            const btn = document.getElementById('downloadBtn');
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
-            btn.disabled = true;
-            const el = document.getElementById('printArea');
-            el.classList.add('capturing');
-            html2canvas(el, { scale: 3, useCORS: true }).then(canvas => {
-                const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
-                pdf.addImage(canvas.toDataURL('image/jpeg', 0.9), 'JPEG', 0, 0, 210, 297);
-                pdf.save('ID_Cards.pdf');
-                el.classList.remove('capturing');
-                btn.innerHTML = '<i class="fa-solid fa-download"></i> Download PDF';
-                btn.disabled = false;
-                showToast('PDF Downloaded');
-            });
         }
     </script>
 </body>
