@@ -266,7 +266,7 @@ input[type=range]::-webkit-slider-runnable-track {
     width: 210mm;
     height: 297mm;
     background: white;
-    box-shadow: var(--shadow-paper); /* Professional deep shadow */
+    /* box-shadow: var(--shadow-paper); /* For Sheet Shadow */ */
     padding: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -539,3 +539,4 @@ input[type=range]::-webkit-slider-runnable-track {
     .id-card { border: none; box-shadow: none; background: white !important; }
 
 }
+
