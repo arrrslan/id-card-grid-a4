@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID Card Grid A4 - Professional Edition</title>
+    <title>ID Card Grid A4</title>
     <!-- Favicon -->
     <link rel="icon" 
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect x='32' y='80' width='448' height='352' rx='32' ry='32' fill='%23800000'/><path d='M104 160c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H104zM164 160c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H164zM104 232c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H104zM164 232c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4h48c2.2 0 4-1.8 4-4v-56c0-2.2-1.8-4-4-4H164z' fill='%23FFC000'/></svg>">
@@ -12,51 +12,54 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
 
     <style>
         :root {
             /* Brand Colors - Rich Maroon & Gold */
             --primary: #800000;       /* Deep Maroon */
             --primary-gradient: linear-gradient(135deg, #800000 0%, #5a0000 100%);
-            --primary-hover: #5a0000; 
+            --primary-hover: #a52a2a; 
             
             --accent: #800000;        /* Maroon as Accent */
-            --accent-light: #a52a2a;  /* Lighter Maroon */
+            --accent-light: #c41e3a;  /* Lighter Maroon */
             --success: #10b981;       /* Vibrant Emerald */
             
-            /* UI Colors */
-            --bg-body: #0f172a;       /* Dark Slate / Professional Workspace Background */
-            --surface: #ffffff;       /* Clean White Panels */
-            --surface-secondary: #f8fafc;
+            /* UI Colors - Frosted Glass Theme (Light Mode) */
+            --bg-body: #f5f5f5;       /* Light Background */
+            --surface: rgba(255, 255, 255, 0.9);    /* Frosted Glass */
+            --surface-secondary: rgba(255, 255, 255, 0.95);
+            --surface-hover: rgba(255, 255, 255, 0.85);
             
-            --text-main: #1e293b;     /* Slate 800 */
-            --text-muted: #64748b;    /* Slate 500 */
+            --text-main: #1a1a1a;     /* Dark Text */
+            --text-muted: #666666;    /* Medium Gray Text */
             
-            --border: #e2e8f0;        /* Light Border */
-            --border-active: #cbd5e1;
+            --border: rgba(200, 30, 58, 0.2);    /* Maroon Border */
+            --border-active: rgba(200, 30, 58, 0.5);
 
             /* Effects */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --shadow-paper: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Deep shadow for A4 paper */
+            --shadow-sm: 0 2px 8px rgba(200, 30, 58, 0.1);
+            --shadow-md: 0 4px 12px rgba(200, 30, 58, 0.15);
+            --shadow-lg: 0 8px 24px rgba(200, 30, 58, 0.2);
+            --shadow-xl: 0 12px 36px rgba(200, 30, 58, 0.25);
+            --shadow-paper: 0 16px 48px rgba(200, 30, 58, 0.3);
             
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-body);
-            /* Subtle professional ambient light */
+            /* Maroon gradient background - Light Mode */
             background-image: 
-                radial-gradient(circle at 0% 0%, rgba(128, 0, 0, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(128, 0, 0, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(200, 30, 58, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(200, 30, 58, 0.05) 0%, transparent 50%);
             background-attachment: fixed;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Google Sans Flex', sans-serif;
             color: var(--text-main);
             display: flex;
             justify-content: center;
@@ -65,13 +68,13 @@
             gap: 2.5rem;
         }
 
-        /* --- SIDEBAR CONTROLS --- */
+        /* --- SIDEBAR CONTROLS - FROSTED GLASS --- */
         .controls {
             position: sticky;
             top: 2rem;
             height: fit-content;
             background: var(--surface);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-xl);
             width: 380px;
@@ -80,12 +83,22 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
-        .header { text-align: left; border-bottom: 2px solid var(--primary); padding-bottom: 1.5rem; }
+        .header { 
+            text-align: left; 
+            border-bottom: 3px solid #c41e3a; 
+            padding-bottom: 1.5rem;
+            background: linear-gradient(135deg, rgba(200, 30, 58, 0.08) 0%, rgba(200, 30, 58, 0.04) 100%);
+            padding: 1.5rem;
+            margin: -2.5rem -2.5rem 0 -2.5rem;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
         .header h1 { 
-            font-size: 1.6rem; font-weight: 800; color: var(--primary); 
+            font-size: 1.6rem; font-weight: 800; color: #c41e3a; 
             display: flex; align-items: center; gap: 0.75rem; letter-spacing: -0.02em; 
         }
         .header h1 i { 
@@ -94,36 +107,38 @@
             padding: 0.6rem; 
             border-radius: 0.5rem; 
             font-size: 1.2rem; 
-            box-shadow: var(--shadow-md); 
+            box-shadow: 0 4px 15px rgba(128, 0, 0, 0.4); 
         }
         .header p { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.5; font-weight: 500; }
 
         .section-group { display: flex; flex-direction: column; gap: 1rem; }
         .section-title {
             font-size: 0.7rem; font-weight: 800; text-transform: uppercase; 
-            letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 0.25rem; display: block;
+            letter-spacing: 0.08em; color: #c41e3a; margin-bottom: 0.25rem; display: block;
         }
 
-        /* File Upload Cards */
+        /* File Upload Cards - Frosted Glass */
         .upload-card {
             position: relative;
             background: var(--surface-secondary);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 1.25rem;
+            padding: 1.5rem;
             display: flex;
             align-items: center;
             gap: 1rem;
             transition: all 0.3s ease;
             cursor: pointer;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .upload-card:hover { 
-            border-color: var(--primary);
-            background: #fffafa; /* Very light tint of maroon */
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
+            border-color: #c41e3a;
+            background: rgba(200, 30, 58, 0.08);
+            box-shadow: 0 8px 20px rgba(200, 30, 58, 0.2);
+            transform: translateY(-2px);
         }
         
         .upload-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 10; }
@@ -135,30 +150,30 @@
         
         .upload-icon-wrapper {
             width: 48px; height: 48px;
-            background: white;
+            background: rgba(200, 30, 58, 0.1);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--border);
-            color: var(--text-muted);
+            border: 2px solid #c41e3a;
+            color: #c41e3a;
             transition: all 0.3s ease;
         }
 
         .upload-card:hover .upload-icon-wrapper {
-            color: var(--primary);
-            border-color: var(--primary);
-            background: var(--primary);
             color: white;
+            border-color: #c41e3a;
+            background: #c41e3a;
+            box-shadow: 0 4px 15px rgba(200, 30, 58, 0.4);
         }
 
         .upload-icon { font-size: 1.2rem; }
         
         .upload-info { display: flex; flex-direction: column; text-align: left; flex: 1; }
         .upload-label { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
-        .file-status { font-size: 0.75rem; color: var(--primary); font-weight: 600; min-height: 1.1em; margin-top: 2px;}
+        .file-status { font-size: 0.75rem; color: #c41e3a; font-weight: 600; min-height: 1.1em; margin-top: 2px;}
 
         /* Settings Toggle */
         .settings-card {
-            background: var(--surface);
+            background: transparent;
             border-radius: var(--radius-md);
             padding: 0;
             border: none;
@@ -173,22 +188,26 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             background: var(--surface-secondary);
-            transition: 0.2s;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
-        .switch-row:hover { border-color: var(--border-active); background: white; }
+        .switch-row:hover { border-color: var(--border-active); background: var(--surface-hover); }
 
         .switch-label { font-size: 0.9rem; font-weight: 600; color: var(--text-main); }
         
         .switch { position: relative; width: 44px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .3s; border-radius: 24px; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-        input:checked + .slider { background-color: var(--primary); }
+        .slider { position: absolute; cursor: pointer; inset: 0; background-color: #e0e0e0; transition: .3s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        input:checked + .slider { background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); }
         input:checked + .slider:before { transform: translateX(20px); }
 
         /* Sliders */
         #scanControls {
             margin-top: 1rem; padding: 1rem; background: var(--surface-secondary); border-radius: var(--radius-md); border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         input[type=range] {
@@ -197,13 +216,14 @@
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; appearance: none;
             height: 18px; width: 18px; border-radius: 50%;
-            background: var(--primary); cursor: pointer; margin-top: -7px;
-            box-shadow: 0 0 0 2px white, 0 2px 4px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); 
+            cursor: pointer; margin-top: -7px;
+            box-shadow: 0 0 0 2px rgba(200, 30, 58, 0.2), 0 2px 8px rgba(200, 30, 58, 0.3);
             transition: transform 0.1s;
         }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 4px; cursor: pointer; background: #cbd5e1; border-radius: 2px;
+            width: 100%; height: 4px; cursor: pointer; background: #e0e0e0; border-radius: 2px;
         }
 
         /* Action Buttons */
@@ -214,34 +234,38 @@
             font-weight: 600; font-size: 0.95rem; cursor: pointer;
             transition: all 0.2s ease;
             display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Google Sans Flex', sans-serif;
             position: relative; overflow: hidden;
         }
 
         .btn:active { transform: scale(0.98); }
         
         .btn-primary { 
-            background: var(--primary-gradient); 
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); 
             color: white; 
-            box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(200, 30, 58, 0.3);
             text-transform: uppercase;
             letter-spacing: 0.05em;
             font-size: 0.85rem;
+            border: 1px solid rgba(200, 30, 58, 0.3);
         }
         .btn-primary:hover { 
-            box-shadow: 0 6px 16px rgba(128, 0, 0, 0.4); 
-            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(200, 30, 58, 0.4); 
+            transform: translateY(-2px);
         }
 
         .btn-ghost { 
             background: transparent; 
             color: var(--text-muted); 
             border: 1px solid var(--border); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
         .btn-ghost:hover { 
-            background: var(--surface-secondary); 
-            color: var(--primary); 
-            border-color: var(--primary);
+            background: var(--surface-hover); 
+            color: #c41e3a; 
+            border-color: #c41e3a;
+            box-shadow: 0 4px 12px rgba(200, 30, 58, 0.15);
         }
 
         /* --- PREVIEW AREA --- */
@@ -302,8 +326,8 @@
         }
 
         .id-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.15), 0 10px 20px rgba(0,0,0,0.1);
+            border-color: #c41e3a;
+            box-shadow: 0 0 0 3px rgba(200, 30, 58, 0.15), 0 10px 30px rgba(0,0,0,0.1);
             z-index: 10;
             transform: scale(1.02);
         }
@@ -330,8 +354,9 @@
         /* --- CROPPER MODAL --- */
         .crop-modal {
             position: fixed; inset: 0; z-index: 1000;
-            background: rgba(15, 23, 42, 0.9); /* Darker backdrop */
+            background: rgba(255, 255, 255, 0.1); /* Frosted glass background */
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: none;
             flex-direction: column;
             align-items: center;
@@ -343,12 +368,12 @@
         .crop-container {
             position: relative;
             background: #000;
-            box-shadow: var(--shadow-xl);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
             max-width: 85vw; 
             max-height: 80vh;
-            border-radius: 4px;
+            border-radius: 0;
             overflow: hidden;
-            border: 1px solid #333;
+            border: 1px solid #c41e3a;
             user-select: none;
         }
 
@@ -358,21 +383,21 @@
         
         .crop-handle {
             width: 16px; height: 16px;
-            background: var(--accent); /* Maroon Handles */
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
             border: 2px solid white;
             border-radius: 50%;
             position: absolute;
             transform: translate(-50%, -50%);
             cursor: grab;
             z-index: 20;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 12px rgba(200, 30, 58, 0.4);
         }
         .crop-handle:active { cursor: grabbing; transform: translate(-50%, -50%) scale(1.3); }
 
         .crop-line {
             position: absolute;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.7);
+            height: 2px;
+            background: repeating-linear-gradient(to right, #000000 0, #000000 5px, #ffffff 5px, #ffffff 10px);
             transform-origin: 0 50%;
             pointer-events: none;
             z-index: 10;
@@ -380,10 +405,77 @@
 
         .crop-controls {
             display: flex; gap: 1rem; margin-top: 1.5rem;
-            background: var(--surface);
+            background: rgba(255, 255, 255, 0.95);
             padding: 1rem 1.5rem;
             border-radius: 1rem; /* Pill shape */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 32px rgba(200, 30, 58, 0.15);
+            border: 2px solid #c41e3a;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow-buttons {
+            display: none;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .arrow-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #c41e3a;
+            background: white;
+            color: #c41e3a;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-weight: bold;
+        }
+
+        .arrow-btn:hover {
+            background: #c41e3a;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .arrow-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 600px) {
+            .arrow-buttons {
+                display: flex;
+            }
+        }
+
+        /* Mobile-specific crop controls bar (appears fixed at bottom on small screens) */
+        .crop-controls-mobile {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            /* hide desktop buttons inside the modal on mobile, but keep arrow buttons visible */
+            .crop-controls > .btn { display: none; }
+            .crop-controls-mobile {
+                display: flex;
+                gap: 0.5rem;
+                position: fixed;
+                left: 50%;
+                bottom: 18px;
+                transform: translateX(-50%);
+                background: rgba(255,255,255,0.95);
+                padding: 0.5rem;
+                border-radius: 10px;
+                border: 1px solid #c41e3a;
+                z-index: 2002;
+            }
         }
 
         /* --- ZOOM VIEWER --- */
@@ -391,17 +483,20 @@
             position: fixed;
             left: 2rem;
             top: 50%;
-            transform: translateY(-50%);
             width: 220px;
             height: 220px;
-            background: #1e1e1e;
-            border: 2px solid var(--border);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #c41e3a;
+            border-radius: 100%;
             overflow: hidden;
             display: none; 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 10px 40px rgba(200, 30, 58, 0.3), inset 0 0 20px rgba(200, 30, 58, 0.05);
             z-index: 1010;
-            pointer-events: none; 
+            pointer-events: all;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: grab;
+            transition: cursor 0.2s;
         }
         .zoom-window.active { display: block; }
 
@@ -409,43 +504,34 @@
             width: 100%; height: 100%; object-fit: contain; display: block;
         }
 
-        .zoom-crosshair {
-            position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center;
-        }
-        .zoom-crosshair::before, .zoom-crosshair::after {
-            content: ''; position: absolute; background: var(--border); box-shadow: 0 0 2px rgba(0,0,0,0.8);
-        }
-        .zoom-crosshair::before { width: 100%; height: 1px; }
-        .zoom-crosshair::after { width: 1px; height: 100%; }
-        
-        .zoom-label {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            background: rgba(0,0,0,0.8); color: var(--border);
-            font-size: 0.7rem; text-align: center; padding: 6px;
-            text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;
-        }
 
         /* --- EASTER EGG FOOTER --- */
         .easter-egg-footer {
-            position: fixed; bottom: 20px; right: 20px; font-size: 0.75rem; color: #64748b;
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 8px 16px; border-radius: 50px; opacity: 0.6; transition: 0.3s; cursor: default; z-index: 100;
-            font-family: 'Inter', sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+            position: fixed; bottom: 20px; right: 20px; font-size: 0.75rem; color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.08); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 16px; border-radius: 50px; opacity: 0.8; transition: 0.3s; cursor: default; z-index: 100;
+            font-family: 'Google Sans Flex', sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
         }
-        .easter-egg-footer:hover { opacity: 1; background: rgba(255, 255, 255, 0.2); color: white; }
-        .easter-egg-footer span { color: var(--primary); font-weight: bold; }
+        .easter-egg-footer:hover { opacity: 1; background: rgba(200, 30, 58, 0.1); color: #c41e3a; }
 
         /* Toast Notification */
         .toast {
             position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: #1e293b; color: white; padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.95); 
+            color: #1a1a1a; padding: 0.75rem 1.5rem;
             border-radius: 3rem; font-size: 0.9rem; font-weight: 500;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 2000; display: flex; align-items: center; gap: 0.75rem; border: 1px solid #334155;
+            box-shadow: 0 8px 32px rgba(200, 30, 58, 0.2); 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000; display: flex; align-items: center; gap: 0.75rem; 
+            border: 2px solid #c41e3a;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
         .toast.show { transform: translateX(-50%) translateY(0); }
-        .toast i { color: var(--success); }
+        .toast i { color: #10b981; }
 
         /* Responsive */
         @media (max-width: 1000px) {
@@ -575,13 +661,11 @@
     <!-- ZOOM VIEWER -->
     <div class="zoom-window" id="zoomWindow">
         <canvas id="zoomCanvas"></canvas>
-        <div class="zoom-crosshair"></div>
-        <div class="zoom-label" id="zoomLabel">Zoom 200%</div>
     </div>
 
     <!-- CROPPER MODAL -->
     <div class="crop-modal" id="cropModal">
-        <h2 style="color:white; margin-bottom: 1.5rem; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.05em;">ADJUST CARD CORNERS</h2>
+        <h2 style="color:rgb(255, 65, 65); margin-bottom: 1.5rem; font-size: 1.2rem; font-weight: 600; letter-spacing: 0.05em;">ADJUST CARD CORNERS</h2>
         <div class="crop-container">
             <div class="crop-canvas-wrapper" id="cropWrapper">
                 <canvas id="cropCanvas"></canvas>
@@ -598,11 +682,35 @@
             </div>
         </div>
         <div class="crop-controls">
-            <button class="btn btn-ghost" onclick="closeCropper()" style="border-color: #cbd5e1; color: #64748b;">Cancel</button>
-            <button class="btn btn-ghost" onclick="rotateSourceImage()" style="border-color: var(--accent); color: var(--accent);">
+            <div style="display:flex; flex-direction:column; gap:0.5rem; min-width:220px;">
+                <label style="font-weight:700; font-size:0.85rem; color:#6b7280; display:flex; justify-content:space-between;">
+                    <span>Zoom</span>
+                    <span id="zoomVal" style="color:#c41e3a; font-weight:800;">1.5x</span>
+                </label>
+                <input id="zoomRange" type="range" min="1" max="3" step="0.1" value="1.5">
+            </div>
+
+            <button class="btn btn-ghost" onclick="closeCropper()" style="border-color: #c41e3a; color: #c41e3a;">Cancel</button>
+            <button class="btn btn-ghost" onclick="rotateSourceImage()" style="border-color: #c41e3a; color: #c41e3a;">
                 <i class="fa-solid fa-rotate-right"></i> Rotate
             </button>
-            <button class="btn btn-primary" onclick="applyCrop()" style="background: var(--accent); box-shadow: 0 4px 10px rgba(128, 0, 0, 0.4);">Crop</button>
+            <button class="btn btn-primary" onclick="applyCrop()" style="background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); box-shadow: 0 6px 20px rgba(200, 30, 58, 0.3); border: none; color: white;"><i class="fa-solid fa-crop"></i> Crop</button>
+            
+            <div class="arrow-buttons" id="arrowButtons">
+                <button class="arrow-btn" onclick="moveHandle('up')" title="Move Up">↑</button>
+                <button class="arrow-btn" onclick="moveHandle('left')" title="Move Left">←</button>
+                <button class="arrow-btn" onclick="moveHandle('down')" title="Move Down">↓</button>
+                <button class="arrow-btn" onclick="moveHandle('right')" title="Move Right">→</button>
+            </div>
+        </div>
+
+        <!-- Mobile-only controls bar (duplicates actions for easy access on small screens) -->
+        <div class="crop-controls-mobile" id="cropControlsMobile">
+            <button class="btn btn-ghost" onclick="closeCropper()" style="border-color: #c41e3a; color: #c41e3a;">Cancel</button>
+            <button class="btn btn-ghost" onclick="rotateSourceImage()" style="border-color: #c41e3a; color: #c41e3a;">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button class="btn btn-primary" onclick="applyCrop()" style="background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); box-shadow: 0 6px 20px rgba(200, 30, 58, 0.3); border: none; color: white; padding:0.6rem 0.8rem;"><i class="fa-solid fa-crop"></i></button>
         </div>
     </div>
 
@@ -698,6 +806,55 @@
         const zoomCtx = zoomCanvas.getContext('2d');
         zoomCanvas.width = 400; // Double resolution of the window (200px)
         zoomCanvas.height = 400;
+        // Adjustable zoom level (can be changed by UI)
+        let zoomLevel = 1.5;
+
+        // Zoom window drag functionality
+        let isDraggingZoom = false;
+        let zoomDragOffsetX = 0;
+        let zoomDragOffsetY = 0;
+
+        zoomWin.addEventListener('mousedown', (e) => {
+            isDraggingZoom = true;
+            const rect = zoomWin.getBoundingClientRect();
+            zoomDragOffsetX = e.clientX - rect.left;
+            zoomDragOffsetY = e.clientY - rect.top;
+            zoomWin.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDraggingZoom && zoomWin.classList.contains('active')) {
+                const newX = e.clientX - zoomDragOffsetX;
+                const newY = e.clientY - zoomDragOffsetY;
+                
+                // Constrain to viewport
+                const maxX = window.innerWidth - zoomWin.offsetWidth;
+                const maxY = window.innerHeight - zoomWin.offsetHeight;
+                
+                zoomWin.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
+                zoomWin.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+                zoomWin.style.transform = 'none'; // Remove default transform
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDraggingZoom = false;
+            if (zoomWin.classList.contains('active')) {
+                zoomWin.style.cursor = 'grab';
+            }
+        });
+
+        zoomWin.addEventListener('mouseover', () => {
+            if (!isDraggingZoom && zoomWin.classList.contains('active')) {
+                zoomWin.style.cursor = 'grab';
+            }
+        });
+
+        zoomWin.addEventListener('mouseleave', () => {
+            if (!isDraggingZoom) {
+                zoomWin.style.cursor = 'default';
+            }
+        });
 
         function initCropper(file, callback) {
             currentFile = file;
@@ -744,6 +901,13 @@
                     // Init Zoom with TL
                     zoomWin.classList.add('active');
                     updateZoom(corners.tl.x, corners.tl.y);
+                    // Initialize zoom UI if present
+                    const zr = document.getElementById('zoomRange');
+                    const zv = document.getElementById('zoomVal');
+                    if (zr) {
+                        zr.value = zoomLevel;
+                        if (zv) zv.innerText = zoomLevel.toFixed(1) + 'x';
+                    }
                 };
                 imgObj.src = e.target.result;
             };
@@ -783,8 +947,7 @@
             const sourceX = cx / scaleFactor;
             const sourceY = cy / scaleFactor;
             
-            // Zoom Factor: 2x
-            const zoomLevel = 2;
+            // Zoom Factor is adjustable via `zoomLevel` variable
             const zw = zoomCanvas.width / zoomLevel;
             const zh = zoomCanvas.height / zoomLevel;
             
@@ -815,9 +978,10 @@
             const zbr = toZoom(corners.br);
             const zbl = toZoom(corners.bl);
 
+            // Draw black and white colored line
             zoomCtx.beginPath();
-            zoomCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
             zoomCtx.lineWidth = 2;
+            zoomCtx.strokeStyle = '#000000';
             zoomCtx.moveTo(ztl.x, ztl.y);
             zoomCtx.lineTo(ztr.x, ztr.y);
             zoomCtx.lineTo(zbr.x, zbr.y);
@@ -825,15 +989,26 @@
             zoomCtx.closePath();
             zoomCtx.stroke();
 
+            // Draw white colored line with slight offset for alternating effect
+            zoomCtx.beginPath();
+            zoomCtx.lineWidth = 2;
+            zoomCtx.strokeStyle = '#ffffff';
+            zoomCtx.moveTo(ztl.x + 1, ztl.y + 1);
+            zoomCtx.lineTo(ztr.x + 1, ztr.y + 1);
+            zoomCtx.lineTo(zbr.x + 1, zbr.y + 1);
+            zoomCtx.lineTo(zbl.x + 1, zbl.y + 1);
+            zoomCtx.closePath();
+            zoomCtx.stroke();
+
             // Draw corner points for clarity
-            zoomCtx.fillStyle = '#800000';
+            zoomCtx.fillStyle = '#c41e3a';
             const r = 5; 
             [ztl, ztr, zbr, zbl].forEach(p => {
                 zoomCtx.beginPath();
                 zoomCtx.arc(p.x, p.y, r, 0, Math.PI * 2);
                 zoomCtx.fill();
-                zoomCtx.strokeStyle = 'white';
-                zoomCtx.lineWidth = 1;
+                zoomCtx.strokeStyle = 'gray';
+                zoomCtx.lineWidth = 4;
                 zoomCtx.stroke();
             });
         }
@@ -875,6 +1050,15 @@
         for(let key in handles) {
             handles[key].addEventListener('mousedown', handleDown(key));
             handles[key].addEventListener('touchstart', handleDown(key));
+            // Touchend selects handle on mobile (so arrow/buttons can act on it)
+            handles[key].addEventListener('touchend', (e) => {
+                e.stopPropagation();
+                // stop dragging and select the handle for mobile actions
+                draggedHandle = null;
+                selectedHandle = key;
+                Object.values(handles).forEach(h => h.style.outline = 'none');
+                handles[key].style.outline = '2px solid #FFD700';
+            });
         }
 
         const moveHandler = (e) => {
@@ -895,7 +1079,113 @@
         window.addEventListener('mouseup', () => draggedHandle = null);
         window.addEventListener('touchend', () => draggedHandle = null);
 
+        // Keyboard support for handle movement
+        let selectedHandle = null;
+        
+        for(let key in handles) {
+            handles[key].addEventListener('click', (e) => {
+                e.stopPropagation();
+                selectedHandle = key;
+                // Visual feedback
+                Object.values(handles).forEach(h => h.style.outline = 'none');
+                handles[key].style.outline = '2px solid #FFD700';
+            });
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (!selectedHandle || !document.getElementById('cropModal').classList.contains('active')) return;
+            
+            const step = e.shiftKey ? 10 : 1;
+            let moved = false;
+            
+            switch(e.key) {
+                case 'ArrowUp':
+                    e.preventDefault();
+                    corners[selectedHandle].y = Math.max(0, corners[selectedHandle].y - step);
+                    moved = true;
+                    break;
+                case 'ArrowDown':
+                    e.preventDefault();
+                    corners[selectedHandle].y = Math.min(canvas.height, corners[selectedHandle].y + step);
+                    moved = true;
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    corners[selectedHandle].x = Math.max(0, corners[selectedHandle].x - step);
+                    moved = true;
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    corners[selectedHandle].x = Math.min(canvas.width, corners[selectedHandle].x + step);
+                    moved = true;
+                    break;
+                case 'Escape':
+                    selectedHandle = null;
+                    Object.values(handles).forEach(h => h.style.outline = 'none');
+                    break;
+            }
+            
+            if (moved) {
+                updateHandles();
+                updateZoom(corners[selectedHandle].x, corners[selectedHandle].y);
+            }
+        });
+
+        // Mobile arrow button handler
+        function moveHandle(direction) {
+            if (!selectedHandle || !document.getElementById('cropModal').classList.contains('active')) {
+                showToast('Select a corner first');
+                return;
+            }
+            
+            const step = 3; // Smaller steps for mobile precision
+            let moved = false;
+            
+            switch(direction) {
+                case 'up':
+                    corners[selectedHandle].y = Math.max(0, corners[selectedHandle].y - step);
+                    moved = true;
+                    break;
+                case 'down':
+                    corners[selectedHandle].y = Math.min(canvas.height, corners[selectedHandle].y + step);
+                    moved = true;
+                    break;
+                case 'left':
+                    corners[selectedHandle].x = Math.max(0, corners[selectedHandle].x - step);
+                    moved = true;
+                    break;
+                case 'right':
+                    corners[selectedHandle].x = Math.min(canvas.width, corners[selectedHandle].x + step);
+                    moved = true;
+                    break;
+            }
+            
+            if (moved) {
+                updateHandles();
+                updateZoom(corners[selectedHandle].x, corners[selectedHandle].y);
+            }
+        }
+
+        // Zoom slider control (if present in DOM)
+        (function setupZoomControl(){
+            const zr = document.getElementById('zoomRange');
+            const zv = document.getElementById('zoomVal');
+            if (!zr) return;
+            zr.value = zoomLevel;
+            if (zv) zv.innerText = zoomLevel.toFixed(1) + 'x';
+            zr.addEventListener('input', (ev) => {
+                zoomLevel = parseFloat(ev.target.value) || 1;
+                if (zv) zv.innerText = zoomLevel.toFixed(1) + 'x';
+                // refresh zoom at selected handle or TL
+                const cx = selectedHandle ? corners[selectedHandle].x : corners.tl.x;
+                const cy = selectedHandle ? corners[selectedHandle].y : corners.tl.y;
+                updateZoom(cx, cy);
+            });
+        })();
+
         function closeCropper() {
+            selectedHandle = null;
+            Object.values(handles).forEach(h => h.style.outline = 'none');
             document.getElementById('cropModal').classList.remove('active');
             zoomWin.classList.remove('active');
             document.body.style.overflow = ''; // Restore scroll
