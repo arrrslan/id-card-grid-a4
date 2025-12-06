@@ -468,10 +468,16 @@ body.dark-mode .crop-modal {
     overflow: hidden;
     border: 1px solid #c41e3a;
     user-select: none;
+    /* FIX: Ensure container wraps tightly */
+    width: fit-content;
+    height: fit-content;
 }
 
 .crop-canvas-wrapper {
     position: relative;
+    /*FIX: */
+    line-height: 0;
+    font-size: 0;
 }
 
 .crop-handle {
@@ -524,6 +530,10 @@ body.dark-mode .arrow-btn {
     color: #ffffff;
 }
 
+#cropCanvas {
+    /* FIX: Force block display to remove vertical gaps */
+    display: block;
+}
 body.dark-mode .arrow-btn:hover {
     background: #1f0808;
 
@@ -698,3 +708,4 @@ body.dark-mode .arrow-btn:hover {
     /* Ensure delete buttons are gone in print */
     .delete-btn { display: none !important; }
 }
+
