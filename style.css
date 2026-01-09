@@ -60,10 +60,12 @@ body.dark-mode {
 
 body {
     background-color: var(--bg-body);
-    /* Maroon gradient background - Light Mode (Default) */
+    /* Maroon gradient background + Dot Grid - Light Mode (Default) */
     background-image: 
+        radial-gradient(rgba(200, 30, 58, 0.15) 1px, transparent 1px),
         radial-gradient(circle at 20% 50%, rgba(200, 30, 58, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 80% 50%, rgba(200, 30, 58, 0.05) 0%, transparent 50%);
+    background-size: 24px 24px, 100% 100%, 100% 100%; /* Dot grid size */
     background-attachment: fixed;
     font-family: 'Google Sans Flex', sans-serif;
     color: var(--text-main);
@@ -80,8 +82,10 @@ body {
 /* Update Background for Dark Mode */
 body.dark-mode {
     background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
         radial-gradient(circle at 20% 50%, rgba(200, 30, 58, 0.15) 0%, transparent 60%),
         radial-gradient(circle at 80% 50%, rgba(200, 30, 58, 0.1) 0%, transparent 60%);
+    background-size: 24px 24px, 100% 100%, 100% 100%;
 }
 
 /* --- SIDEBAR CONTROLS - REDESIGNED --- */
@@ -633,12 +637,60 @@ body.dark-mode .arrow-btn:hover {
     background: rgba(255, 255, 255, 0.08); 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border);
     padding: 8px 16px; border-radius: 50px; opacity: 0.8; transition: 0.3s; cursor: pointer; z-index: 100;
     font-family: 'Google Sans Flex', sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
     user-select: none;
 }
-.easter-egg-footer:hover { opacity: 1; background: rgba(200, 30, 58, 0.1); color: #c41e3a; }
+.easter-egg-footer:hover { opacity: 1; background: rgba(174, 73, 90, 0.1); color: #c41e3a; }
+
+.popup-text {
+    visibility: hidden;
+    background-color: var(--surface-secondary);
+    color: var(--text-main);
+    text-align: center;
+    border-radius: 20px;
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    pointer-events: none;
+    white-space: nowrap;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.popup-text::before {
+    content: "Tap to Dark Mode";
+}
+
+body.dark-mode .popup-text::before {
+    content: "Tap to Light Mode";
+}
+
+.popup-text::after {
+    content: "";
+    position: absolute;
+}
+
+.easter-egg-footer:hover .popup-text {
+    visibility: visible;
+    animation: popupFade 2s forwards;
+}
+
+@keyframes popupFade {
+    0% { opacity: 0; transform: translateX(-50%) translateY(5px); }
+    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-5px); visibility: hidden; }
+}
 
 /* Toast Notification */
 .toast {
@@ -663,6 +715,19 @@ body.dark-mode .arrow-btn:hover {
     .preview-container { width: 100%; padding-top: 0; overflow-x: hidden; }
     .easter-egg-footer { position: static; margin-top: 2rem; }
     .zoom-window { left: auto; right: 20px; top: 20px; transform: none; width: 140px; height: 140px; border-width: 1px; }
+}
+
+/* Dark Mode for A4 Sheet - Matches .controls */
+body.dark-mode .a4-sheet {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+body.dark-mode .id-card {
+    background: var(--surface-secondary);
+    border-color: var(--border);
+}
+.card-slot {
+    border-color: var(--border);
 }
 
 /* PRINT CONFIGURATION */
@@ -695,12 +760,13 @@ body.dark-mode .arrow-btn:hover {
         box-shadow: none;
         page-break-after: avoid; 
         page-break-inside: avoid; 
+        background: white !important; /* Force white background for print */
         background-image: none; 
         overflow: hidden;
         border: none;
     }
     
-    .card-slot { border-right: 1px dashed #94a3b8 !important; border-bottom: 1px dashed #94a3b8 !important; }
+    .card-slot { border-right: 0.5px dashed #94a3b8 !important; border-bottom: 0.5px dashed #94a3b8 !important; }
     .card-slot:nth-child(2n) { border-right: none !important; }
     .card-slot:nth-last-child(-n+2) { border-bottom: none !important; }
     .id-card { border: none; box-shadow: none; background: white !important; }
@@ -708,5 +774,3 @@ body.dark-mode .arrow-btn:hover {
     /* Ensure delete buttons are gone in print */
     .delete-btn { display: none !important; }
 }
-
-
